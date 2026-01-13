@@ -1,1 +1,362 @@
-# 2026-DecaDEMO
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Customer Journey | Freshness Date Education</title>
+  <style>
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:#0f172a;
+      color:#e5e7eb;
+    }
+    .wrap{max-width:950px;margin:0 auto;padding:38px 18px 60px}
+    h1{margin:0 0 10px;font-size:28px}
+    h2{margin:0 0 12px;font-size:22px}
+    p{color:#cbd5f5;line-height:1.55;margin:10px 0}
+    .card{
+      background:#111827;
+      border:1px solid #1f2937;
+      border-radius:16px;
+      padding:22px;
+      margin-top:16px;
+    }
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      padding:14px 18px;border:1px solid #1f2937;border-radius:16px;background:#0b1220;
+    }
+    .step{color:#a5b4fc;font-size:13px}
+    .mini{color:#9ca3af;font-size:13px}
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    button{
+      background:#2563eb;
+      color:white;
+      border:none;
+      border-radius:10px;
+      padding:12px 16px;
+      font-size:14px;
+      cursor:pointer;
+    }
+    button.secondary{background:#374151}
+    button.ghost{
+      background:transparent;border:1px solid #334155;color:#e5e7eb;
+    }
+    button:hover{filter:brightness(1.05)}
+    .tag{
+      display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;margin-bottom:8px;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .bestby{background:rgba(37,99,235,.25); color:#bfdbfe}
+    .sellby{background:rgba(245,158,11,.18); color:#fde68a}
+    .useby{background:rgba(239,68,68,.18); color:#fecaca}
+    .priceRow{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-top:8px}
+    .price{font-size:22px;font-weight:800}
+    .strike{text-decoration:line-through;color:#9ca3af;font-size:14px}
+    .save{margin-left:auto;background:#22c55e;color:#052e16;font-weight:800;padding:6px 10px;border-radius:999px;font-size:12px}
+    .panel{
+      background:#0b1220;border:1px solid #1f2937;border-radius:14px;padding:14px;margin-top:12px;
+    }
+    .highlight{
+      background:#062018;border-left:4px solid #22c55e;
+      padding:12px;margin-top:12px;border-radius:10px;color:#bbf7d0;font-size:14px
+    }
+    .warn{
+      background:#231a06;border-left:4px solid #f59e0b;
+      padding:12px;margin-top:12px;border-radius:10px;color:#fde68a;font-size:14px
+    }
+    .hidden{display:none}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width: 760px){.grid2{grid-template-columns:1fr}}
+    .choice{
+      width:100%;
+      text-align:left;
+      background:transparent;
+      border:1px solid #334155;
+      border-radius:12px;
+      padding:12px 14px;
+      color:#e5e7eb;
+      cursor:pointer;
+    }
+    .choice:hover{border-color:#60a5fa}
+    .choice small{display:block;color:#9ca3af;margin-top:4px;font-size:12.5px}
+    .correct{border-color:#22c55e !important}
+    .wrong{border-color:#ef4444 !important}
+    .footerNote{color:#94a3b8;font-size:12.5px;margin-top:14px}
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div>
+      <div class="step" id="stepTitle">Step 1 of 6</div>
+      <div style="font-weight:800">Customer Journey Prototype: Learn the Date Labels</div>
+    </div>
+    <div class="mini">Click through like a real shopper</div>
+  </div>
+
+  <!-- SCREEN 1: START -->
+  <div id="screen1" class="card">
+    <h1>Start: Shopper sees a discount</h1>
+    <p>
+      The shopper finds a discounted item but is unsure what the date label means.
+      This is the exact confusion your research identified.
+    </p>
+
+    <div class="card">
+      <span class="tag bestby">Best By</span>
+      <h2>Greek Yogurt (6-pack)</h2>
+
+      <div class="priceRow">
+        <div class="price">$3.99</div>
+        <div class="strike">$6.49</div>
+        <div class="save">Save $2.50</div>
+      </div>
+
+      <p>The shopper hesitates: “Is this still good?”</p>
+
+      <div class="btnRow">
+        <button onclick="goTo(2)">Tap to understand the label</button>
+        <button class="secondary" onclick="goTo(5)">Ignore it and walk away</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: TEACH BEST BY -->
+  <div id="screen2" class="card hidden">
+    <h2>What does “Best By” mean?</h2>
+    <span class="tag bestby">Best By</span>
+    <div class="panel">
+      <p><b>Best By</b> means the product is freshest before this date, but it can still be safe after.</p>
+      <p>It helps customers judge quality, not automatically safety.</p>
+    </div>
+
+    <div class="highlight">
+      When this is explained clearly, shoppers feel confident buying near-date items.
+    </div>
+
+    <div class="btnRow">
+      <button onclick="goTo(3)">Learn “Sell By” next</button>
+      <button class="secondary" onclick="goTo(1)">Back</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: TEACH SELL BY -->
+  <div id="screen3" class="card hidden">
+    <h2>What does “Sell By” mean?</h2>
+    <span class="tag sellby">Sell By</span>
+    <div class="panel">
+      <p><b>Sell By</b> is mainly for the store. It helps employees rotate items.</p>
+      <p>Customers can often still use the product after the Sell By date.</p>
+    </div>
+
+    <div class="highlight">
+      This reduces confusion and supports better sell-through of discounted items.
+    </div>
+
+    <div class="btnRow">
+      <button onclick="goTo(4)">Learn “Use By” next</button>
+      <button class="secondary" onclick="goTo(2)">Back</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: TEACH USE BY -->
+  <div id="screen4" class="card hidden">
+    <h2>What does “Use By” mean?</h2>
+    <span class="tag useby">Use By</span>
+    <div class="panel">
+      <p><b>Use By</b> is the recommended last date for best quality.</p>
+      <p>It’s the strictest of the three because it’s closer to a “final quality window.”</p>
+    </div>
+
+    <div class="warn">
+      Now the shopper has learned all three labels in under 30 seconds.
+    </div>
+
+    <div class="btnRow">
+      <button onclick="goTo(6)">Quick check: Do you understand?</button>
+      <button class="secondary" onclick="goTo(3)">Back</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5: WALK AWAY (NEGATIVE PATH) -->
+  <div id="screen5" class="card hidden">
+    <h2>Without clarity, the shopper walks away</h2>
+    <p>
+      When labels are confusing, customers skip near-date items.
+      That lowers sell-through and increases shrink.
+    </p>
+
+    <div class="btnRow">
+      <button onclick="goTo(2)">Try again with label education</button>
+      <button class="secondary" onclick="goTo(1)">Restart</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 6: MINI QUIZ -->
+  <div id="screen6" class="card hidden">
+    <h2>Quick check</h2>
+    <p>Select the correct meaning for each label.</p>
+
+    <div class="grid2">
+      <div class="panel">
+        <div style="font-weight:800;margin-bottom:8px">Best By</div>
+        <button class="choice" onclick="answer(this,'best','wrong')">
+          It’s mainly for store rotation
+          <small>(This describes Sell By)</small>
+        </button>
+        <button class="choice" onclick="answer(this,'best','correct')">
+          Freshest before this date, often still okay after
+          <small>(Quality-focused)</small>
+        </button>
+        <button class="choice" onclick="answer(this,'best','wrong')">
+          Recommended last date for best quality
+          <small>(This describes Use By)</small>
+        </button>
+      </div>
+
+      <div class="panel">
+        <div style="font-weight:800;margin-bottom:8px">Sell By</div>
+        <button class="choice" onclick="answer(this,'sell','correct')">
+          Mainly for the store to rotate inventory
+          <small>(Helps reduce older items staying behind)</small>
+        </button>
+        <button class="choice" onclick="answer(this,'sell','wrong')">
+          Freshest before this date, often still okay after
+          <small>(This describes Best By)</small>
+        </button>
+        <button class="choice" onclick="answer(this,'sell','wrong')">
+          Recommended last date for best quality
+          <small>(This describes Use By)</small>
+        </button>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:12px">
+      <div style="font-weight:800;margin-bottom:8px">Use By</div>
+      <button class="choice" onclick="answer(this,'use','wrong')">
+        Mainly for store rotation
+        <small>(This describes Sell By)</small>
+      </button>
+      <button class="choice" onclick="answer(this,'use','wrong')">
+        Freshest before this date, often still okay after
+        <small>(This describes Best By)</small>
+      </button>
+      <button class="choice" onclick="answer(this,'use','correct')">
+        Recommended last date for best quality
+        <small>(Closest to the end of the quality window)</small>
+      </button>
+    </div>
+
+    <div id="quizResult" class="highlight hidden">
+      Nice. When shoppers understand labels, they buy near-date items more often.
+      Next, we send them to a predictable markdown hub.
+    </div>
+
+    <div class="btnRow">
+      <button onclick="goTo(7)" id="toHubBtn" class="hidden">Go to Second Life Savings hub</button>
+      <button class="secondary" onclick="resetQuiz()">Reset quiz</button>
+      <button class="ghost" onclick="goTo(1)">Restart journey</button>
+    </div>
+
+    <div class="footerNote">
+      Prototype note: This is a training-style interaction to show how label education changes customer behavior.
+    </div>
+  </div>
+
+  <!-- SCREEN 7: HUB -->
+  <div id="screen7" class="card hidden">
+    <h2>Second Life Savings hub</h2>
+    <p>
+      Now the shopper knows what labels mean, and can confidently shop discounted items
+      in one predictable place.
+    </p>
+
+    <div class="panel">
+      <p><b>Today’s Markdowns</b></p>
+      <p><span class="tag sellby">Sell By</span> Whole Wheat Bread — $2.49</p>
+      <p><span class="tag bestby">Best By</span> Strawberries (1 lb) — $2.99</p>
+      <p><span class="tag useby">Use By</span> Baby Spinach (Bag) — $2.99</p>
+    </div>
+
+    <div class="highlight">
+      Result: Higher sell-through, lower shrink, and less food waste.
+    </div>
+
+    <div class="btnRow">
+      <button onclick="goTo(8)">Complete purchase</button>
+      <button class="secondary" onclick="goTo(6)">Back to quiz</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 8: END -->
+  <div id="screen8" class="card hidden">
+    <h2>Purchase complete</h2>
+    <p>
+      The shopper buys a discounted item because they understand the labels and can find markdowns easily.
+    </p>
+
+    <div class="highlight">
+      This is the behavior change your plan is designed to create.
+    </div>
+
+    <div class="btnRow">
+      <button onclick="goTo(1)">Restart</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const stepTitle = document.getElementById("stepTitle");
+
+  const screens = [1,2,3,4,5,6,7,8];
+  function goTo(n){
+    // hide all screens
+    screens.forEach(s => document.getElementById("screen"+s).classList.add("hidden"));
+    document.getElementById("screen"+n).classList.remove("hidden");
+
+    // step label
+    const stepMap = {1:"Step 1 of 6",2:"Step 2 of 6",3:"Step 3 of 6",4:"Step 4 of 6",5:"Step 1 of 6",6:"Step 5 of 6",7:"Step 6 of 6",8:"Step 6 of 6"};
+    stepTitle.textContent = stepMap[n] || "Step";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  // Quiz logic
+  const answered = { best:false, sell:false, use:false };
+  const quizResult = document.getElementById("quizResult");
+  const toHubBtn = document.getElementById("toHubBtn");
+
+  function answer(btn, group, result){
+    // lock group after correct answer
+    if(answered[group]) return;
+
+    if(result === "correct"){
+      btn.classList.add("correct");
+      answered[group] = true;
+    }else{
+      btn.classList.add("wrong");
+      setTimeout(()=>btn.classList.remove("wrong"), 700);
+    }
+
+    const allDone = answered.best && answered.sell && answered.use;
+    if(allDone){
+      quizResult.classList.remove("hidden");
+      toHubBtn.classList.remove("hidden");
+    }
+  }
+
+  function resetQuiz(){
+    answered.best = false; answered.sell = false; answered.use = false;
+    quizResult.classList.add("hidden");
+    toHubBtn.classList.add("hidden");
+    document.querySelectorAll(".choice").forEach(b=>{
+      b.classList.remove("correct");
+      b.classList.remove("wrong");
+    });
+  }
+</script>
+</body>
+</html>
